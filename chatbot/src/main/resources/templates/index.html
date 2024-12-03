@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <link id="favicon" rel="icon" type="image/png" th:href="@{/images/icon.png}">
+    <title>AI Customer Service</title>
+    <link rel="stylesheet" th:href="@{/css/chat.css}">
+    <link rel="stylesheet" th:href="@{/css/jquery-ui.css}">
+    <script th:src="@{/js/flexible.js}"></script>
+    <script th:src="@{/js/jQuery-2.2.0.min.js}"></script>
+    <script th:src="@{/js/chat.js}"></script>
+    <script th:src="@{/js/jquery-ui.js}"></script>
+</head>
+<body>
+<header class="header">
+    <a class="back" href="/"></a>
+    <h5 class="tit">AI Customer Service</h5>
+    <div class="right"
+         style="cursor: pointer;"
+         onclick="window.open('/blog/article/100.html');">
+        About
+    </div>
+</header>
+<div id="message">
+
+</div>
+<div id="footer">
+    <img th:src="@{/images/books.png}" id="books" style="cursor: pointer;"/>
+    <input class="my-input" type="text" placeholder="Talk to AI assistant"/>
+    <p class="send">Send</p>
+</div>
+<!-- 加载等待窗口 -->
+<div id="loading">
+    <div class="spinner"></div>
+</div>
+<div id="dialog" title="training knowledge">
+    <div id="users-contain" class="ui-widget">
+        <table id="list" class="ui-widget ui-widget-content">
+            <thead>
+            <tr class="ui-widget-header">
+                <th>text</th>
+            </tr>
+            </thead>
+            <tbody id="list-body">
+            <!-- 动态加载的数据将插入到这里 -->
+            </tbody>
+        </table>
+    </div>
+</div>
+<script th:inline="javascript">
+    // 注入上下文路径到一个 JavaScript 变量中
+    const contextPath = /*[[${#httpServletRequest.contextPath}]]*/ '';
+    // 获取当前屏幕的宽度
+    var screenWidth = window.innerWidth;
+    // 获取当前屏幕的高度
+    var screenHeight = window.innerHeight;
+
+    $("#dialog").dialog({
+        autoOpen: false,
+        width: screenWidth * 0.8,
+        height: screenHeight * 0.8,
+    });
+    $("#books").click(function () {
+        $("#dialog").dialog("open");
+    });
+
+
+    // 使用 AJAX 请求 /getKnowledge 接口并加载数据到表格
+    $.ajax({
+        url: contextPath + '/getKnowledge',  // 后台接口地址
+        method: 'GET',
+        dataType: 'json',  // 假设返回的数据是 JSON 格式的 List<String>
+        success: function (data) {
+            // 清空表格的现有内容
+            $('#list-body').empty();
+
+            // 遍历返回的知识列表，并动态生成表格行
+            data.forEach(function (item) {
+                // 将每个知识点插入到表格中
+                $('#list-body').append('<tr><td>' + item + '</td></tr>');
+            });
+        },
+        error: function (xhr, status, error) {
+            console.error('数据加载失败:', error);
+        }
+    });
+</script>
+</body>
+</html>

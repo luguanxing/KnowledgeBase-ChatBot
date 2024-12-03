@@ -1,0 +1,22 @@
+#utf-8
+spring.thymeleaf.cache = false
+
+# mysql
+spring.datasource.url=
+spring.datasource.username=
+spring.datasource.password=
+spring.datasource.driver-class-name=com.mysql.jdbc.Driver
+
+# redis
+spring.redis.host=
+spring.redis.port=
+
+# 用户查询IP限制
+ip.daily.limit=30
+ip.ttl.seconds=86400
+
+# gpt接口和模型配置
+gpt.api.key=
+gpt.api.url=
+gpt.embedding_encoding=text-embedding-3-small
+gpt.model=gpt-4o
