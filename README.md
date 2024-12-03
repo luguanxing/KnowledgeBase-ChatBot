@@ -5,9 +5,11 @@
 
 A WeChat-like chatbot with a knowledge base implemented using a Spring Boot-based chat window interface => [DemoPage](https://luguanxing.com/chatbot/)
 
-![image](https://github.com/user-attachments/assets/48f7e617-af55-40bb-aa4b-612827a96638)
+<img width="280" alt="image" src="https://github.com/user-attachments/assets/4fa5eed1-d16c-428c-9101-52aecbef2b83"><br/>
 
-![image](https://github.com/user-attachments/assets/e73573fc-0c19-43c9-94b3-4d1d158c8014)
+<img width="280" alt="image" src="https://github.com/user-attachments/assets/3b8e21b3-edb1-4fae-b995-0cb7385bcc3d"><br/>
+
+<img width="280" alt="image" src="https://github.com/user-attachments/assets/4409c329-d2b8-4ae5-973a-d5073b52ea51"><br/>
 
 <br/>
 
